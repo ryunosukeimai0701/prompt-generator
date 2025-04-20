@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>プロンプト自動生成ツール</title>
+  <style>
+    body { font-family: sans-serif; max-width: 700px; margin: 2em auto; padding: 1em; border: 1px solid #ccc; border-radius: 10px; }
+    label { font-weight: bold; display: block; margin-top: 1em; }
+    textarea, input { width: 100%; padding: 0.5em; margin-top: 0.5em; }
+    button { margin-top: 1.5em; padding: 0.7em 1.2em; font-size: 1em; }
+    pre { white-space: pre-wrap; background: #f8f8f8; padding: 1em; border: 1px solid #ddd; border-radius: 5px; margin-top: 1em; }
+  </style>
+</head>
+<body>
+  <h1>🧠 プロンプト自動生成ツール</h1>
+
+  <label for="role">🎭 ロール（あなたは〇〇です）</label>
+  <input id="role" type="text" placeholder="例：あなたは非エンジニア向けの業務自動化エンジニアです">
+
+  <label for="action">🛠 アクション（AIに何をさせたいか）</label>
+  <input id="action" type="text" placeholder="例：請求書作成のコードを書いてください">
+
+  <label for="subject">📌 サブジェクト（対象・テーマ）</label>
+  <input id="subject" type="text" placeholder="例：GASからPythonへの置き換え">
+
+  <label for="focus">🎯 フォーカス（出力の視点）</label>
+  <input id="focus" type="text" placeholder="例：非エンジニアでも理解できるように">
+
+  <label for="context">📂 コンテキスト（前提・背景）</label>
+  <textarea id="context" rows="3" placeholder="例：私はフリーランスで、毎月スプレッドシートで請求作業をしています"></textarea>
+
+  <button onclick="generatePrompt()">✨ プロンプトを生成する</button>
+
+  <h2>📝 生成されたプロンプト：</h2>
+  <pre id="output"></pre>
+
+  <script>
+    function generatePrompt() {
+      const role = document.getElementById("role").value;
+      const action = document.getElementById("action").value;
+      const subject = document.getElementById("subject").value;
+      const focus = document.getElementById("focus").value;
+      const context = document.getElementById("context").value;
+
+      const prompt = `${role}\n${action}\n対象は、${subject}です。\n出力は、${focus}の視点でお願いします。\n前提として、${context}を踏まえてください。`;
+
+      document.getElementById("output").textContent = prompt;
+    }
+  </script>
+</body>
+</html>
